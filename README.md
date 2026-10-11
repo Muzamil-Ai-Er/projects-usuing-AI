@@ -5,6 +5,7 @@ A growing collection of practical projects created with the help of free AI tool
 The goal of this repository is to turn ideas into clean, useful, and deployable projects while learning through building.
 
 ## Featured Project: Daymark
+ https://muzamil-ai-er.github.io/projects-usuing-AI/
 
 Daymark is a personal productivity dashboard for planning the day, managing tasks, writing notes, and running focus sessions.
 
@@ -32,3 +33,6 @@ Clone the repository and open `index.html` in any modern web browser.
 
 ```bash
 git clone https://github.com/your-username/your-repository-name.git
+
+projects
+1  https://muzamil-ai-er.github.io/projects-usuing-AI/ Day mark
