@@ -1,24 +1,34 @@
-# Daymark
+# Free AI Projects
 
-A lightweight personal command center built as a static site. Tasks, notes, intention, theme, and focus minutes persist in the browser with `localStorage`.
+A growing collection of practical projects created with the help of free AI tools.
 
-## Run locally
+The goal of this repository is to turn ideas into clean, useful, and deployable projects while learning through building.
 
-Open `index.html` in a modern browser. No build step or package installation is required.
+## Featured Project: Daymark
 
-## Publish on GitHub Pages
+Daymark is a personal productivity dashboard for planning the day, managing tasks, writing notes, and running focus sessions.
 
-1. Create a GitHub repository and push these files to its default branch.
-2. In the repository, open **Settings** > **Pages**.
-3. Set the source to **Deploy from a branch**, choose the default branch and `/ (root)`, then save.
+### Features
 
-GitHub will provide the public URL after deployment.
-
-## Included
-
-- Responsive desktop and mobile layout
-- Create, complete, remove, and clear tasks
+- Create, complete, and remove tasks
+- Daily focus timer with 25, 45, and 60 minute sessions
 - Personal notes and daily intention
-- Configurable focus timer
-- Editable planner items
-- Light and dark color themes
+- Simple planner for upcoming activities
+- Light and dark themes
+- Responsive design for desktop and mobile
+- Browser-based storage with no backend required
+
+### Built With
+
+- HTML
+- CSS
+- JavaScript
+- Lucide Icons
+- AI-generated visual assets
+
+### Run Locally
+
+Clone the repository and open `index.html` in any modern web browser.
+
+```bash
+git clone https://github.com/your-username/your-repository-name.git
