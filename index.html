@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A personal command center for focused days." />
+    <title>Daymark - Personal Command Center</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Primary navigation">
+        <a class="brand" href="#today" aria-label="Daymark home">
+          <span class="brand-mark" aria-hidden="true"><span></span><span></span></span>
+          <span>daymark</span>
+        </a>
+
+        <nav class="nav-links" aria-label="Workspace">
+          <a class="nav-link active" href="#today"><i data-lucide="layout-dashboard"></i><span>Today</span></a>
+          <a class="nav-link" href="#focus"><i data-lucide="timer-reset"></i><span>Focus</span></a>
+          <a class="nav-link" href="#up-next"><i data-lucide="calendar-days"></i><span>Planner</span></a>
+          <a class="nav-link" href="#notes"><i data-lucide="notebook-pen"></i><span>Notes</span></a>
+        </nav>
+
+        <div class="sidebar-bottom">
+          <div class="streak-card">
+            <span class="eyebrow">Current streak</span>
+            <strong><span id="streakCount">12</span> days</strong>
+            <div class="streak-bars" aria-label="Twelve day streak">
+              <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+          <button class="profile-button" type="button" title="Profile settings" id="profileButton">
+            <span class="avatar">A</span>
+            <span class="profile-copy"><strong>Alex</strong><small>Personal space</small></span>
+            <i data-lucide="more-horizontal"></i>
+          </button>
+        </div>
+      </aside>
+
+      <main class="workspace">
+        <header class="topbar">
+          <button class="icon-button menu-toggle" type="button" title="Open navigation" aria-label="Open navigation" id="menuToggle"><i data-lucide="menu"></i></button>
+          <div class="date-lockup"><span id="dayName">Saturday</span><span class="date-dot"></span><span id="fullDate">October 11</span></div>
+          <div class="topbar-actions">
+            <button class="icon-button" type="button" title="Toggle color theme" aria-label="Toggle color theme" id="themeToggle"><i data-lucide="moon"></i></button>
+            <button class="new-task-button" type="button" id="openTaskDialog"><i data-lucide="plus"></i><span>New task</span></button>
+          </div>
+        </header>
+
+        <section class="content-grid" id="today">
+          <div class="main-column">
+            <section class="welcome-panel" aria-labelledby="welcomeTitle">
+              <div>
+                <p class="eyebrow" id="greeting">Good morning, Alex</p>
+                <h1 id="welcomeTitle">Make the day<br /><em>yours.</em></h1>
+                <p class="welcome-subtitle" id="dailyIntention">One considered step at a time.</p>
+              </div>
+              <button class="image-moment" type="button" id="editIntention" title="Edit daily intention" aria-label="Edit daily intention">
+                <img src="assets/morning-desk.png" alt="Notebook and watch on a sunlit desk" />
+                <span class="image-label"><i data-lucide="pencil"></i> Intention</span>
+              </button>
+            </section>
+
+            <section class="metrics" aria-label="Daily progress">
+              <article class="metric">
+                <span class="metric-icon coral"><i data-lucide="check-check"></i></span>
+                <div><span class="metric-label">Tasks complete</span><strong id="taskMetric">0 of 0</strong></div>
+              </article>
+              <article class="metric">
+                <span class="metric-icon amber"><i data-lucide="flame"></i></span>
+                <div><span class="metric-label">Focus today</span><strong id="focusMetric">0m</strong></div>
+              </article>
+              <article class="metric">
+                <span class="metric-icon olive"><i data-lucide="sparkles"></i></span>
+                <div><span class="metric-label">Day score</span><strong id="scoreMetric">0%</strong></div>
+              </article>
+            </section>
+
+            <section class="section-block task-section" aria-labelledby="todayTitle">
+              <div class="section-heading">
+                <div><p class="eyebrow">Your list</p><h2 id="todayTitle">Today’s priorities</h2></div>
+                <button class="text-button" type="button" id="clearCompleted">Clear finished</button>
+              </div>
+              <div class="progress-row"><div class="progress-track"><span id="taskProgress"></span></div><span id="progressText">0% complete</span></div>
+              <div class="task-list" id="taskList" aria-live="polite"></div>
+              <button class="add-task-row" type="button" id="openTaskDialogSecondary"><i data-lucide="plus"></i><span>Add another task</span></button>
+            </section>
+
+            <section class="section-block notes-section" id="notes" aria-labelledby="notesTitle">
+              <div class="section-heading compact-heading">
+                <div><p class="eyebrow">Scratchpad</p><h2 id="notesTitle">Keep the thought</h2></div>
+                <span class="saved-state" id="noteStatus"><i data-lucide="cloud"></i> Saved locally</span>
+              </div>
+              <label class="sr-only" for="notesInput">Notes</label>
+              <textarea id="notesInput" rows="5" placeholder="A good idea deserves somewhere to land."></textarea>
+            </section>
+          </div>
+
+          <aside class="right-column">
+            <section class="focus-card" id="focus" aria-labelledby="focusTitle">
+              <div class="focus-topline"><span class="eyebrow">Focus session</span><button type="button" class="icon-button small-icon" id="resetTimer" title="Reset timer" aria-label="Reset timer"><i data-lucide="rotate-ccw"></i></button></div>
+              <h2 id="focusTitle">Protect the<br />quiet hour.</h2>
+              <div class="timer-wrap">
+                <div class="timer-ring"><span id="timerDisplay">25:00</span><small id="timerState">Ready</small></div>
+              </div>
+              <div class="timer-controls">
+                <button class="timer-button" type="button" id="timerToggle"><i data-lucide="play"></i><span>Start focus</span></button>
+                <div class="timer-options" role="group" aria-label="Timer duration">
+                  <button class="timer-option active" type="button" data-minutes="25">25</button>
+                  <button class="timer-option" type="button" data-minutes="45">45</button>
+                  <button class="timer-option" type="button" data-minutes="60">60</button>
+                </div>
+              </div>
+              <p class="session-count"><i data-lucide="clock-3"></i> <span id="sessionMinutes">0</span> focused minutes today</p>
+            </section>
+
+            <section class="agenda-section" id="up-next" aria-labelledby="agendaTitle">
+              <div class="section-heading compact-heading"><div><p class="eyebrow">On the horizon</p><h2 id="agendaTitle">Coming up</h2></div><button class="icon-button small-icon" type="button" id="addEventButton" title="Add calendar item" aria-label="Add calendar item"><i data-lucide="plus"></i></button></div>
+              <div class="agenda-list" id="agendaList"></div>
+            </section>
+
+            <section class="quote-block" aria-label="Daily thought">
+              <i data-lucide="quote"></i>
+              <blockquote id="quoteText">“Small disciplines repeated with consistency lead to great achievements.”</blockquote>
+              <button class="quote-refresh" type="button" id="quoteRefresh"><i data-lucide="refresh-cw"></i><span>Another thought</span></button>
+            </section>
+          </aside>
+        </section>
+      </main>
+    </div>
+
+    <dialog class="task-dialog" id="taskDialog">
+      <form method="dialog" id="taskForm">
+        <div class="dialog-header"><div><p class="eyebrow">Make space</p><h2>Add a task</h2></div><button class="icon-button small-icon dialog-close" type="button" title="Close" aria-label="Close"><i data-lucide="x"></i></button></div>
+        <label for="taskName">What needs your attention?</label>
+        <input id="taskName" name="taskName" type="text" maxlength="80" placeholder="Write a clear next step" required autocomplete="off" />
+        <fieldset><legend>Energy</legend><div class="choice-row"><label><input type="radio" name="priority" value="high" checked /><span>High</span></label><label><input type="radio" name="priority" value="medium" /><span>Medium</span></label><label><input type="radio" name="priority" value="low" /><span>Low</span></label></div></fieldset>
+        <div class="dialog-actions"><button class="button-quiet" type="button" id="cancelTaskDialog">Cancel</button><button class="button-primary" type="submit"><i data-lucide="plus"></i> Add task</button></div>
+      </form>
+    </dialog>
+
+    <dialog class="mini-dialog" id="eventDialog">
+      <form method="dialog" id="eventForm">
+        <div class="dialog-header"><div><p class="eyebrow">Planner</p><h2>Add an item</h2></div><button class="icon-button small-icon dialog-close" type="button" title="Close" aria-label="Close"><i data-lucide="x"></i></button></div>
+        <label for="eventName">What’s happening?</label><input id="eventName" name="eventName" type="text" required maxlength="60" placeholder="Planning call" />
+        <label for="eventTime">Time</label><input id="eventTime" name="eventTime" type="time" required value="15:00" />
+        <div class="dialog-actions"><button class="button-quiet" type="button" id="cancelEventDialog">Cancel</button><button class="button-primary" type="submit"><i data-lucide="plus"></i> Add item</button></div>
+      </form>
+    </dialog>
+
+    <dialog class="intention-dialog" id="intentionDialog">
+      <form method="dialog" id="intentionForm">
+        <div class="dialog-header"><div><p class="eyebrow">Today’s direction</p><h2>Set an intention</h2></div><button class="icon-button small-icon dialog-close" type="button" title="Close" aria-label="Close"><i data-lucide="x"></i></button></div>
+        <label for="intentionInput">A few words for today</label><input id="intentionInput" name="intentionInput" type="text" required maxlength="100" />
+        <div class="dialog-actions"><button class="button-quiet" type="button" id="cancelIntentionDialog">Cancel</button><button class="button-primary" type="submit">Save intention</button></div>
+      </form>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
